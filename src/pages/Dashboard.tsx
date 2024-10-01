@@ -43,7 +43,7 @@ function Dashboard() {
 
 
     const sortByMostRecent = () => {
-        const orderedData = transactionList.sort((a, b) => {
+        const orderedData = [...transactionList].sort((a, b) => {
             const aDate = new Date(a.date).getTime();
             const bDate = new Date(b.date).getTime();
             return bDate - aDate
