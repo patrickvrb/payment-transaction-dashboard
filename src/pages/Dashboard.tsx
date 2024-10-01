@@ -28,10 +28,6 @@ function Dashboard() {
     }, [])
 
 
-    if (isLoading) {
-        return <div>Loading... Please wait</div>
-    }
-
     const filterTransaction = (startDate: string, endDate: string) => {
         const filteredDates = transactionList.filter(transaction => {
             const date = new Date(transaction.date);
@@ -45,6 +41,22 @@ function Dashboard() {
         setFilteredData(transactionList)
     }
 
+
+    const sortByMostRecent = () => {
+        const orderedData = transactionList.sort((a, b) => {
+            const aDate = new Date(a.date).getTime();
+            const bDate = new Date(b.date).getTime();
+            return bDate - aDate
+        })
+
+        setFilteredData(orderedData);
+    }
+
+
+
+    if (isLoading) {
+        return <div>Loading... Please wait</div>
+    }
 
     return (
         <>
@@ -70,15 +82,17 @@ function Dashboard() {
                 </label>
             </div>
 
-            <button onClick={() => filterTransaction(startDate, endDate)}> Filter </button>
+            <button onClick={() => filterTransaction(startDate, endDate)}>Filter</button>
+            <button onClick={() => sortByMostRecent()}>Sort by most recent</button>
             <button onClick={() => clearFilter()}>Clear</button>
             <br />
 
             {
                 filteredData.map((transaction, idx) => {
                     return <><div key={idx}>
-                        <b>Transaction id:</b>, {transaction.id} <b>Amount:</b>, {transaction.amount} <b>Transaction Date:</b>, {transaction.date.toDateString()}, <b>Transaction description:</b>, {transaction.description}
-                    </div><br /></>
+                        <div><b>Transaction id:</b>, {transaction.id} <b>Amount:</b>, {transaction.amount} <b>Transaction Date:</b>, {transaction.date.toDateString()}, <b>Transaction description:</b>, {transaction.description}</div>
+                        <br />
+                    </div></>
                 })
             }
 

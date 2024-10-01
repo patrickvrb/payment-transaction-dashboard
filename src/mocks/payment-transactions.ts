@@ -24,7 +24,7 @@ export const PAYMENT_TRANSACTIONS: Transaction[] = [
     },
     {
         id: 5,
-        date: new Date(2024, 8, 6),
+        date: new Date(2024, 10, 22),
         description: 'Candy from candy shop Z',
         amount: 2.89
     },
