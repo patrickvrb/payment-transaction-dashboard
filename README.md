@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# Payment transaction dashboard
 
 This is a simple project to simulate a transaction payment dashboard
 
